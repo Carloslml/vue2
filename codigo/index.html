@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<title>Curso de VueJS 2</title>
+	<style>
+		.like{
+			background: green;
+			color:white;
+			padding: 10px;
+		}
+	</style>
+</head>
+<body>
+	
+	<div id="app">
+		{{texto}}
+	</div>
+	
+	
+	<div id="tercera">
+		{{otrainstancia}}
+	</div>
+	
+	
+	<main>
+		
+		<hr>
+		<h2>Listado por AJAX</h2>
+			<ol v-if="posts">
+				<li v-for="(post,index) in posts">{{post.title}} 
+				</li>
+			</ol>
+		<span v-else>Cargado...</span>
+		<hr>
+
+		<h2>{{nombreYapellidos}}</h2>		
+		<hr>
+		
+		<h4>Listado ordenado</h4>
+		<input type="search" v-model="busqueda" placeholder="Buscar fruta">
+		<ol>
+            <li @click="marcar(index)" :class="{	like: index==confirmado}" v-for="(fruta,index) in buscarFruta">{{fruta.nombre | mayusculas}}</li>
+        </ol>
+		
+		<hr>
+
+		<!--Eventos-->
+		<h2>Peliculas</h2>
+        <ol>
+            <li v-for="(pelicula,index) in peliculas">{{pelicula}} <button @click="borrarPelicula(index)">X</button></li>
+        </ol>
+		<form @submit.prevent="crearPelicula()">
+			<input type="text" v-model="peliculaNueva">
+			<button type="submit">Guardar</button>
+		</form>
+        <!--<button v-on:click="crearPelicula()">Crear pelicula</button>
+		<button @click="borrarPelicula()">Borrar pelicula</button>-->
+		<hr>
+		
+		<!-- Imprimir el contenido de una variable del modelo / instacia vue-->
+		<h1>{{ texto }}</h1>
+		<h2 v-text="texto"></h2>
+        <hr>
+        
+        <!--Two way data binding/ enlace de datos bidireccional y la reactividad-->
+        <input type="text" v-model="nombre">
+        <p>El nombre es: {{nombre}}</p>
+        <hr>
+        
+        <!--Directivas condicionales v-if-->
+        Nota:<input type="text" v-model="nota">
+        <b v-if="nota && nota <5">Perdiste, Tu nota es {{nota}}</b>
+        <b v-else-if="nota && nota >=5 && nota<10">Bien, tu nota es {{nota}}</b>
+        <span v-else>La mejor Nota:{{nota}}</span>
+        <hr>
+        
+        <!--Directivas condicionales v-if-->
+        <h2>Listado de peliculas (array)</h2>
+        <ul>
+            <li v-for="pelicula in peliculas">{{pelicula}}</li>
+        </ul>
+        
+        <h2>Listado de frutas (array de objetos)</h2>
+        <ul>
+            <li v-for="(fruta,index) in frutas">{{index}}: {{fruta.nombre}}-{{fruta.color}}</li>
+        </ul>
+        
+          <h2>Listado de elementos de Superfruta (objeto)</h2>
+        <ul>
+            <li v-for="(value,key,index) in superfruta">{{index}}: {{key}}-{{value}}</li>
+        </ul>
+			
+		<hr>
+		
+
+        
+    </main>
+	<!--<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>-->
+	
+	<script src="js/vue.js"></script>
+	<script src="js/axios.min.js"></script>
+	<script src="js/main.js"></script>
+
+</body>
+</html>
